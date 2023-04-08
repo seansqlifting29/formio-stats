@@ -68,7 +68,7 @@ describe('test formio stats', () => {
       },
       "metadata": {}
   }
-    const res = distribution([formioResult1, formioResult2, formioResult3, formioResult4], 'haveEpilepsy')
+    const res = distribution([formioResult1, formioResult2, formioResult3, formioResult4], 'married')
     equal(res.percentageOfTrue, 75)
     equal(res.percentageOfFalse, 25)
   })
