@@ -1,0 +1,9 @@
+{
+  "data": {
+    "under18": false,
+    "male": false,
+    "female": true,
+    "over50": true,
+    "under30": false,
+    "submit": true
+  }
