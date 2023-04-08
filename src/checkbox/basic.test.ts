@@ -30,7 +30,7 @@ describe('test formio stats', () => {
           "single": false,
           "under30": false,
           "over50": false,
-          "underlyingHealthConditions": false,
+          "underlyingHealthConditions": true,
           "textArea": "Need updates on programs",
           "submit": false
       },
@@ -68,8 +68,8 @@ describe('test formio stats', () => {
       },
       "metadata": {}
   }
-    const res = distribution([formioResult1, formioResult2, formioResult3, formioResult4], 'over50')
-    equal(res.percentageOfTrue, 25)
-    equal(res.percentageOfFalse, 75)
+    const res = distribution([formioResult1, formioResult2, formioResult3, formioResult4], 'underlyingHealthConditions')
+    equal(res.percentageOfTrue, 50)
+    equal(res.percentageOfFalse, 50)
   })
 })
