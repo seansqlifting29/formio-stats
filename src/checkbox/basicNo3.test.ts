@@ -20,7 +20,7 @@ console.log(importedResults);
 describe('test formio stats', () => {
   it('properly gives checkbox statistics when pulling from a folder titled md inside this directory. However, these unit tests will limit NUM_RESULTS to 7 for convenience.', () => {
 
-      const res = distribution(importedResults, 'no_plagiarized_content')
+      const res = distribution(importedResults, 'adequate_length')
     equal(res.percentageOfTrue, 57)
     equal(res.percentageOfFalse, 43)
   })
