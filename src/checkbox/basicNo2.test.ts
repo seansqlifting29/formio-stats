@@ -3,7 +3,7 @@ import { equal } from 'assert'
 import { expect } from '@jest/globals';
 
 describe('test formio stats', () => {
-    it('properly gives checkbox statistics for multiple attributes in and out of the order they occur', () => {
+    it('properly gives checkbox statistics for multiple attributes in and out of the order they occur wtih one or more JSON objects,and adds Math.round() to original function', () => {
 
         var formioResult1 = {
             "data": {
@@ -69,10 +69,10 @@ describe('test formio stats', () => {
             },
             "metadata": {}
         }
-        const res = distribution([formioResult1, formioResult2, formioResult3, formioResult4], ["under18", "male", "female", "haveEpilepsy", "married", "single", "under30", "over50","underlyingHealthConditions"])
+        const res = distribution([formioResult1, formioResult2, formioResult3], ["under18", "male", "female", "haveEpilepsy", "married", "single", "under30", "over50","underlyingHealthConditions"])
        expect.arrayContaining(res.trueArr)
-       expect([50, 100, 0, 75, 75, 25, 0, 25, 50]).toEqual(expect.arrayContaining(res.trueArr));
+        expect([33, 100, 0, 67, 67, 33, 0, 33, 67]).toEqual(expect.arrayContaining(res.trueArr));
        expect.arrayContaining(res.falseArr)
-       expect([50, 0, 100, 25, 25, 75, 100, 75, 50]).toEqual(expect.arrayContaining(res.falseArr));
+        expect([67, 0, 100, 33, 33, 67, 100, 67, 33]).toEqual(expect.arrayContaining(res.falseArr));
     })
 })

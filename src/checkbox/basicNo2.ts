@@ -14,8 +14,8 @@ export const distribution = function (formioSubmissions: any, checkBoxId: string
                     }
             }
         }
-        trueArr.push((trueCount * 100) / (trueCount + falseCount));
-        falseArr.push((falseCount * 100) / (trueCount + falseCount))
+        trueArr.push(Math.round((trueCount * 100) / (trueCount + falseCount)));
+        falseArr.push(Math.round((falseCount * 100) / (trueCount + falseCount)))
     }
     return {
         trueArr,
