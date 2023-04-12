@@ -12,7 +12,7 @@ export const distribution = function(formioSubmissions: any, checkBoxId: string)
         }
     }
     return {
-        percentageOfTrue: Math.floor((trueCount * 100) / (trueCount + falseCount)),
-        percentageOfFalse: Math.floor((falseCount * 100) / (trueCount + falseCount))
+        percentageOfTrue: Math.round((trueCount * 100) / (trueCount + falseCount)),
+        percentageOfFalse: Math.round((falseCount * 100) / (trueCount + falseCount))
     }
 }
