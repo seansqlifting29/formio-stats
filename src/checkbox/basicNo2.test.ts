@@ -69,10 +69,10 @@ describe('test formio stats', () => {
             },
             "metadata": {}
         }
-       const res = distribution([formioResult1, formioResult2, formioResult3, formioResult4], ["under18", "male", "female", "haveEpilepsy"])
+       const res = distribution([formioResult1, formioResult2, formioResult3, formioResult4], ["under18", "male", "female", "haveEpilepsy","married"])
        expect.arrayContaining(res.trueArr)
-       expect([50, 100, 0, 75]).toEqual(expect.arrayContaining(res.trueArr));
+       expect([50, 100, 0, 75, 75]).toEqual(expect.arrayContaining(res.trueArr));
        expect.arrayContaining(res.falseArr)
-       expect([50, 0, 100, 25]).toEqual(expect.arrayContaining(res.falseArr));
+       expect([50, 0, 100, 25, 25]).toEqual(expect.arrayContaining(res.falseArr));
     })
 })
