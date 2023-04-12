@@ -3,7 +3,7 @@ import { equal } from 'assert'
 import { expect } from '@jest/globals';
 
 describe('test formio stats', () => {
-    it('properly gives checkbox statistics', () => {
+    it('properly gives checkbox statistics for multiple attributes in and out of the order they occur', () => {
 
         var formioResult1 = {
             "data": {
@@ -69,10 +69,10 @@ describe('test formio stats', () => {
             },
             "metadata": {}
         }
-       const res = distribution([formioResult1, formioResult2, formioResult3, formioResult4], ["male"])
+       const res = distribution([formioResult1, formioResult2, formioResult3, formioResult4], ["under18", "male"])
        expect.arrayContaining(res.trueArr)
-       expect([100]).toEqual(expect.arrayContaining(res.trueArr));
+       expect([50, 100]).toEqual(expect.arrayContaining(res.trueArr));
        expect.arrayContaining(res.falseArr)
-       expect([0]).toEqual(expect.arrayContaining(res.falseArr));
+       expect([50, 0]).toEqual(expect.arrayContaining(res.falseArr));
     })
 })
