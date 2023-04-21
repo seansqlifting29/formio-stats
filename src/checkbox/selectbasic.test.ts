@@ -139,32 +139,32 @@ var formioResult4 = {
 }
 
 describe('test formio stats', () => {
-  it('properly gives checkbox statistics', () => {
-      const res = distribution([formioResult1, formioResult2, formioResult3, formioResult4], 'question2')
-    // 2 rich - 1 poor - 1 median [4 samples] ___ 50% rich, 25% poor, 25% median
-      console.log(res)
-      equal(res.length, 4)
-      let casesTested = 0
-      res.forEach(singleResult => {
-          if (singleResult[0] === 'rich') {
-              equal(singleResult[1], 25)
-              casesTested++
-          }
-          if (singleResult[0] === 'poor') {
-              equal(singleResult[1], 25)
-              casesTested++
-          }
-          if (singleResult[0] === 'median') {
-              equal(singleResult[1], 25)
-              casesTested++
-          }
-          if (singleResult[0] === 'neutral') {
-              equal(singleResult[1], 25)
-              casesTested++
-          }
-      })
-      equal(casesTested, 4)
-  })
+    it('properly gives checkbox statistics', () => {
+        const res = distribution([formioResult1, formioResult2, formioResult3, formioResult4], 'question2')
+        // 2 rich - 1 poor - 1 median [4 samples] ___ 50% rich, 25% poor, 25% median
+        console.log(res)
+        equal(res.length, 4)
+        let casesTested = 0
+        res.forEach(singleResult => {
+            if (singleResult[0] === 'rich') {
+                equal(singleResult[1], 25)
+                casesTested++
+            }
+            if (singleResult[0] === 'poor') {
+                equal(singleResult[1], 25)
+                casesTested++
+            }
+            if (singleResult[0] === 'median') {
+                equal(singleResult[1], 25)
+                casesTested++
+            }
+            if (singleResult[0] === 'neutral') {
+                equal(singleResult[1], 25)
+                casesTested++
+            }
+        })
+        equal(casesTested, 4)
+    })
     it('properly gives checkbox statistics', () => {
         const res = distribution([formioResult1, formioResult2, formioResult3, formioResult4], 'question3')
         // 2 rich - 1 poor - 1 median [4 samples] ___ 50% rich, 25% poor, 25% median
@@ -191,8 +191,4 @@ describe('test formio stats', () => {
         })
         equal(casesTested, 4)
     })
-    it('properly gives checkbox statistics', () => {
-        const res = distribution([formioResult1, formioResult2, formioResult3, formioResult4], 'question3')
-        equal(res.arr, [])
-
 })

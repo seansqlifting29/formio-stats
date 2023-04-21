@@ -6,16 +6,15 @@ export const distribution: (formioSubmissions: any, selectBoxId: string) => sing
         var arr = {} //Array<[TYPE, TYPE]> or foreach() keep looking into the suggestions from intellisense
         for (var key in formioSubmissions) {
             for (var sub_key in formioSubmissions[key].data) {
-                for (var quests in formioSubmissions[key].data[sub_key]) {
-                    if (formioSubmissions[key].data[sub_key] === true) {
-                        trueCount++
+                var choices = formioSubmissions[key].data[sub_key]
+                choices.forEach(function (singleResult: any) {
+                    if (singleResult[1] === true) {
+                        console.log(singleResult[0])
                     }
-                    if (formioSubmissions[key].data[sub_key] === false) {
-                        falseCount++
-                    }
-                }
+
+                })
             }
-        }
+        }    
         return [
             ['rich', 25],
             ['poor', 25],
