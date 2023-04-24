@@ -9,17 +9,21 @@ export const distribution: (formioSubmissions: any, selectBoxId: string) => sing
                 var falseCount = 0;
                 Object.entries(choices[sub_key]).forEach(function ([key]) {
                     if (choices[sub_key][key] === false) {
-                        falseCount++
+                        falseCount++;
+                    }
+                    if (choices[sub_key][key] === true) {
+                        trueCount++;
                     }
                 })
                 Object.entries(choices[sub_key]).forEach(function ([key]) {
+                    const filteredArray = [];
                     if (choices[sub_key][key] === true) {
-                        trueCount++
-                    }
-                })
-                Object.entries(choices[sub_key]).forEach(function ([key]) {
-                    if (choices[sub_key][key] === true) {
-                        tupleArr.push([key, (trueCount * 100) / (trueCount + falseCount)])
+                        tupleArr.push([key, (trueCount * 100) / (trueCount + falseCount)]);
+                        Object.entries(tupleArr).forEach(function ([i]) {
+                            if (choices[sub_key][key][i] === choices[sub_key][key][i + 1]) {
+                                filteredArray.push([i]);
+                            }
+                        })//const filteredArray = arrayOfArrays.filter(array => {
                     }
                 })
             }
