@@ -300,8 +300,8 @@ var formioResult7 = {
             "income30000": false,
             "income50000": false,
             "income80000": false,
-            "income100000": false,
-            "income20000": true
+            "income100000": true,
+            "income20000": false
         },
         "whichCountryAreYouFrom": {
             "unitedStates": false,
@@ -339,10 +339,10 @@ var formioResult7 = {
 
 describe('test formio stats', () => {
     it('properly gives checkbox statistics', () => {
-        const res = distribution([formioResult1, formioResult2, formioResult3, formioResult4, formioResult5, formioResult6, formioResult7], 'question2')
+        const res = distribution([formioResult1, formioResult2, formioResult3, formioResult4, formioResult5, formioResult6, formioResult7], "whatIsYourIncome")
         // 2 rich - 1 poor - 1 median [4 samples] ___ 50% rich, 25% poor, 25% median
         console.log(res)
-        equal(res.length, 17)
+        equal(res.length, 4)
         let casesTested = 0
         res.forEach(singleResult => {
             if (singleResult[0] === 'rich') {
@@ -354,6 +354,10 @@ describe('test formio stats', () => {
                 casesTested++
             }
             if (singleResult[0] === 'median') {
+                equal(singleResult[1], 25)
+                casesTested++
+            }
+            if (singleResult[0] === 'neutral') {
                 equal(singleResult[1], 25)
                 casesTested++
             }
