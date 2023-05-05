@@ -99,8 +99,8 @@ var formioResult3 = {
     "data": {
         "howDoYouFeel": {
             "veryHappy": false,
-            "happy": false,
-            "notHappy": true,
+            "happy": true,
+            "notHappy": false,
             "sad": false,
             "angry": false
         },
@@ -146,8 +146,8 @@ var formioResult3 = {
 var formioResult4 = {
     "data": {
         "howDoYouFeel": {
-            "veryHappy": true,
-            "happy": false,
+            "veryHappy": false,
+            "happy": true,
             "notHappy": false,
             "sad": false,
             "angry": false
@@ -196,9 +196,9 @@ var formioResult5 = {
         "howDoYouFeel": {
             "veryHappy": false,
             "happy": false,
-            "notHappy": true,
+            "notHappy": false,
             "sad": false,
-            "angry": false
+            "angry": true
         },
         "whatIsYourIncome": {
             "income30000": false,
@@ -243,14 +243,14 @@ var formioResult6 = {
     "data": {
         "howDoYouFeel": {
             "veryHappy": false,
-            "happy": true,
+            "happy": false,
             "notHappy": false,
-            "sad": false,
+            "sad": true,
             "angry": false
         },
         "whatIsYourIncome": {
-            "income30000": false,
-            "income50000": true,
+            "income30000": true,
+            "income50000": false,
             "income80000": false,
             "income100000": false,
             "income20000": false
@@ -292,9 +292,9 @@ var formioResult7 = {
         "howDoYouFeel": {
             "veryHappy": false,
             "happy": false,
-            "notHappy": false,
+            "notHappy": true,
             "sad": false,
-            "angry": true
+            "angry": false
         },
         "whatIsYourIncome": {
             "income30000": false,
@@ -339,33 +339,85 @@ var formioResult7 = {
 
 describe('test formio stats', () => {
     it('properly gives checkbox statistics', () => {
-        const res = distribution([formioResult1, formioResult2, formioResult3, formioResult4, formioResult5, formioResult6, formioResult7], "whatIsYourIncome")
-        // 2 rich - 1 poor - 1 median [4 samples] ___ 50% rich, 25% poor, 25% median
+        const res = distribution([formioResult1, formioResult2, formioResult3, formioResult4, formioResult5, formioResult6, formioResult7], "howDoYouFeel")
+        // 7 veryHappy - 0 happy - 0 notHappy - 0 sad - 0 angry [5 samples] ___ 100% veryHappy, 0% happy, 0% notHappy 0% sad 0% angry - passed
+        // 6 veryHappy - 1 happy - 0 notHappy - 0 sad - 0 angry [5 samples] ___ 86% veryHappy, 14% happy, 0% notHappy 0% sad 0% angry - passed
+        // 5 veryHappy - 2 happy - 0 notHappy - 0 sad - 0 angry [5 samples] ___ 71% veryHappy, 29% happy, 0% notHappy 0% sad 0% angry - passed
+        // 4 veryHappy - 3 happy - 0 notHappy - 0 sad - 0 angry [5 samples] ___ 57% veryHappy, 43% happy, 0% notHappy 0% sad 0% angry - passed
+        // 3 veryHappy - 4 happy - 0 notHappy - 0 sad - 0 angry [5 samples] ___ 43% veryHappy, 57% happy, 0% notHappy 0% sad 0% angry - passed
+        // 2 veryHappy - 5 happy - 0 notHappy - 0 sad - 0 angry [5 samples] ___ 29% veryHappy, 71% happy, 0% notHappy 0% sad 0% angry - passed
+        // 1 veryHappy - 6 happy - 0 notHappy - 0 sad - 0 angry [5 samples] ___ 14% veryHappy, 86% happy, 0% notHappy 0% sad 0% angry - passed
+        // 1 veryHappy - 5 happy - 1 notHappy - 0 sad - 0 angry [5 samples] ___ 14% veryHappy, 71% happy, 14% notHappy 0% sad 0% angry - passed
+        // 1 veryHappy - 4 happy - 1 notHappy - 1 sad - 0 angry [5 samples] ___ 14% veryHappy, 57% happy, 14% notHappy 14% sad 0% angry - passed
+        // 1 veryHappy - 4 happy - 1 notHappy - 1 sad - 0 angry [5 samples] ___ 14% veryHappy, 43% happy, 14% notHappy 14% sad 14% angry - passed
         console.log(res)
-        equal(res.length, 4)
+        equal(res.length, 5)
         let casesTested = 0
         res.forEach(singleResult => {
-            if (singleResult[0] === 'rich') {
-                equal(singleResult[1], 25)
+            if (singleResult[0] === 'veryHappy') {
+                equal(singleResult[1], 14)
                 casesTested++
             }
-            if (singleResult[0] === 'poor') {
-                equal(singleResult[1], 25)
+            if (singleResult[0] === 'happy') {
+                equal(singleResult[1], 43)
                 casesTested++
             }
-            if (singleResult[0] === 'median') {
-                equal(singleResult[1], 25)
+            if (singleResult[0] === 'notHappy') {
+                equal(singleResult[1], 14)
                 casesTested++
             }
-            if (singleResult[0] === 'neutral') {
-                equal(singleResult[1], 25)
+            if (singleResult[0] === 'sad') {
+                equal(singleResult[1], 14)
                 casesTested++
             }
-            if (singleResult[0] === 'neutral') {
-                equal(singleResult[1], 25)
+            if (singleResult[0] === 'angry') {
+                equal(singleResult[1], 14)
                 casesTested++
             }
         })
-        equal(casesTested, 0)
+        equal(casesTested, 5)
     })
 })
+describe('test formio stats', () => {
+    it('properly gives checkbox statistics', () => {
+        const res = distribution([formioResult1, formioResult2, formioResult3, formioResult4], "whatIsYourIncome")
+        // 7 income30000 - 0 income50000 - 0 income80000 - 0 income100000 - 0 income20000 [5 samples] ___ 100% veryHappy, 0% happy, 0% notHappy 0% sad 0% angry - tbd
+        // 6 veryHappy - 1 happy - 0 notHappy - 0 sad - 0 angry [5 samples] ___ 86% veryHappy, 14% happy, 0% notHappy 0% sad 0% angry - tbd
+        // 5 veryHappy - 2 happy - 0 notHappy - 0 sad - 0 angry [5 samples] ___ 71% veryHappy, 29% happy, 0% notHappy 0% sad 0% angry - tbd
+        // 4 veryHappy - 3 happy - 0 notHappy - 0 sad - 0 angry [5 samples] ___ 57% veryHappy, 43% happy, 0% notHappy 0% sad 0% angry - tbd
+        // 3 veryHappy - 4 happy - 0 notHappy - 0 sad - 0 angry [5 samples] ___ 43% veryHappy, 57% happy, 0% notHappy 0% sad 0% angry - tbd
+        // 2 veryHappy - 5 happy - 0 notHappy - 0 sad - 0 angry [5 samples] ___ 29% veryHappy, 71% happy, 0% notHappy 0% sad 0% angry - tbd
+        // 1 veryHappy - 6 happy - 0 notHappy - 0 sad - 0 angry [5 samples] ___ 14% veryHappy, 86% happy, 0% notHappy 0% sad 0% angry - tbd
+        // 1 veryHappy - 5 happy - 1 notHappy - 0 sad - 0 angry [5 samples] ___ 14% veryHappy, 71% happy, 14% notHappy 0% sad 0% angry - tbd
+        // 1 veryHappy - 4 happy - 1 notHappy - 1 sad - 0 angry [5 samples] ___ 14% veryHappy, 57% happy, 14% notHappy 14% sad 0% angry - tbd
+        // 1 veryHappy - 4 happy - 1 notHappy - 1 sad - 0 angry [5 samples] ___ 14% veryHappy, 43% happy, 14% notHappy 14% sad 14% angry - tbd"whatIsYourIncome": {
+        console.log(res)
+        equal(res.length, 5)
+        let casesTested = 0
+        res.forEach(singleResult => {
+            if (singleResult[0] === 'veryHappy') {
+                equal(singleResult[1], 14)
+                casesTested++
+            }
+            if (singleResult[0] === 'happy') {
+                equal(singleResult[1], 43)
+                casesTested++
+            }
+            if (singleResult[0] === 'notHappy') {
+                equal(singleResult[1], 14)
+                casesTested++
+            }
+            if (singleResult[0] === 'sad') {
+                equal(singleResult[1], 14)
+                casesTested++
+            }
+            if (singleResult[0] === 'angry') {
+                equal(singleResult[1], 14)
+                casesTested++
+            }
+        })
+        equal(casesTested, 5)
+    })
+})
+
+
